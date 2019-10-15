@@ -4,8 +4,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
-    client_id : mongoose.ObjectId,
-    user_id : mongoose.ObjectId,
+    client_id : {
+                   type: mongoose.Schema.Types.ObjectId,
+                   index: true,
+                   required: true,
+                   auto: true
+                 },
+    user_id : {
+                 type: mongoose.Schema.Types.ObjectId,
+                 index: true,
+                 required: true,
+                 auto: true
+               },
     user_name : {
                      type: String,
                      trim: true
@@ -14,15 +24,18 @@ var userSchema = Schema({
                     type: String,
                     trim: true,
                     lowercase: true,
-                    unique: true,
-                    required: 'Email address is required'
+                    unique: true
                 },
     user_password : {
                        type: String,
-                       trim: true,
+                       trim: true
                    },
     user_state : Boolean,
-    user_role : Boolean
+    user_role : Boolean,
+    user_date : {
+                    type: Date,
+                    default: Date.now
+                }
 });
 
 module.exports = mongoose.model('User', userSchema);

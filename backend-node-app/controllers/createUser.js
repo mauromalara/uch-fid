@@ -1,40 +1,43 @@
 'use strict'
 var User = require ('../models/user.js');
+var sha1 = require('sha1');
 
-function createUser (request, response){
-    var params = request.body;
+function createUser (req, res){
+    var params = req.body;
     var userSchema = new User();
 
-    User.find({$and : [{user_Name : params.Name, user_Mail : params.Mail}]}).countDocuments().exec(function(err, user){
+    User.find({$and : [{user_name : params.Name, user_mail : params.Mail}]}).countDocuments().exec(function(err, user){
     if(user == 0){
 
     userSchema.user_name = params.Name,
     userSchema.user_mail = params.Mail,
-    userSchema.user_password = params.Password,
-    userSchema.user_state = 0,
-    userSchema.user_role = 0
+    userSchema.user_password = sha1(params.Password),
+    userSchema.user_state = false,
+    userSchema.user_role = false
 
-    userSchema.insertOne((error, user) => {
+    userSchema.save((error, user) => {
     if(error){
-            response.status(500).send({
-            message :"server err...."
+            res.status(500).send({
+            message :"server err....\n "+ " --> "+error
             })
         }
         else
         {
         if(user){
-            response.redirect(""); //SEND TO THE INDEX PAGE...
+            res.send({
+            message: " SAVE: -->  " + userSchema})
+            //res.redirect(""); //SEND TO THE INDEX PAGE...
             }
             else
             {
-            response.status(200).send({
+            res.status(200).send({
                 message: "NOT SAVED..."
                 })
             }
         }
     })
     }else {
-        response.redirect("" //SEND TO THE UPDATE PAGE...
+        res.redirect("" //SEND TO THE UPDATE PAGE...
          +"?Name="+params.Name
          +"&Mail="+params.Mail
             )
