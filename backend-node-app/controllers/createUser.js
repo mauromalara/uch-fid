@@ -12,7 +12,7 @@ function createUser (req, res){
     userSchema.user_password = bcrypt.hashSync(params.Password, 10);
     userSchema.user_role = params.Role;
 
-    if(params.Role == "Cliente"){
+    if(params.Role == "Client"){
         userSchema.user_name = params.Name;
         userSchema.user_lastName = params.LastName;
         userSchema.user_age = params.Age;
