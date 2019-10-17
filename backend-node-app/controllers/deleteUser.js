@@ -1,37 +1,38 @@
 'use strict'
-var User = require ('../models/user.js');
+const User = require ('../models/user.js');
 
-function deletePerson(req , res){
-    var params = req.body;
+function deleteUser(req , res){
+var params = req.body;
 
-    var name = params.Name;
-    var mail =  params.Mail;
-
-User.find({$and : [{user_name : params.Name, user_mail : params.Mail}]}).exec(function(err, user){
-        var userId = user[0]._id;
-        User.findOneAndDelete({_id : userId}, function(err, deleteUser){
-            if(err){
-                res.status(500).send({
-                    message: "Server ERR..."+err
+User.find({user_mail : params.Mail}).countDocuments().exec(function(err, user){
+    if(user == 0){ res.send({ message : "THE PERSON TO DELETED DOESN'T EXIST..."}) }
+    else{
+        User.find({user_mail : params.Mail}).exec(function(err, user){
+            var userId = user[0]._id;;
+                User.findOneAndDelete({_id: userId}, function(err, deleteUser){
+                    if(err){
+                        res.send({
+                            message: "Server ERR..."+err
+                        })
+                    }
+                    else
+                    {
+                    if(deleteUser){
+                        res.send({
+                        message : "Person DELETED..."
+                        })
+                        }
+                        else
+                        {
+                        res.send({
+                            message: "The person not exist..."
+                            })
+                        }
+                    }
                 })
-            }
-            else
-            {
-            if(deleteUser){
-                res.status(200).send({
-                })
-                }
-                else
-                {
-                res.status(404).send({
-                    message: "The person not exist..."
-                    })
-                }
-            }
-        })
-
-
+            });
+        }
     });
 }
 
-module.exports = deletePerson
+module.exports = deleteUser

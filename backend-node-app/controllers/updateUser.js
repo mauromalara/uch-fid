@@ -1,13 +1,9 @@
 'use strict'
-var User = require ('../models/user.js');
+const User = require ('../models/user.js');
 
-function updatePerson(req, res){
-    var params = req.body;
+function updateUser(req, res){
 
-    var name = params.Name;
-    var mail =  params.Mail;
-
-    User.find({$and : [{user_name : params.Name, user_mail : params.Mail}]}).exec(function(err, user){
+User.find({user_mail : params.Mail}).exec(function(err, user){
         var userId = user[0]._id;
         var update = req.body;
         User.findOneAndUpdate({_id : personId},update, function(err, updateUser){
@@ -35,4 +31,4 @@ function updatePerson(req, res){
 
 }
 
-module.exports = updatePerson
+module.exports = updateUser

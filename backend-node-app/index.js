@@ -23,7 +23,7 @@ var options = {
 var uri = 'mongodb://Bastar2:Bastar2@ds331548.mlab.com:31548/heroku_r933w2r6';
 
 mongoose.connect(uri, options)
-.then(db => console.log('SERVER UP -->  http://localhost:3800'))
+.then(db => console.log('SERVER UP -->  http://localhost:3800/apiBack-End'))
 .catch(err => console.log(err));
 
 app.listen(3800);

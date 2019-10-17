@@ -31,4 +31,5 @@ Config NPM Proyect
     --> npm install express --calssic
     --> npm install body-parser --save
     --> npm install mongoose
-    --> npm install sha1
+    --> npm install bcrypt
+    --> npm install jsonwebtoken

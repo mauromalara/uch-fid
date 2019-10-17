@@ -1,22 +1,29 @@
 'use strict'
-var User = require ('../models/user.js');
-var sha1 = require('sha1');
+const User = require ('../models/user.js');
+const bcrypt = require('bcrypt');
 
 function createUser (req, res){
     var params = req.body;
     var userSchema = new User();
 
-    User.find({$and : [{user_name : params.Name, user_mail : params.Mail}]}).countDocuments().exec(function(err, user){
+    User.find({user_mail : params.Mail}).countDocuments().exec(function(err, user){
     if(user == 0){
+    userSchema.user_mail = params.Mail;
+    userSchema.user_password = bcrypt.hashSync(params.Password, 10);
+    userSchema.user_role = params.Role;
 
-    userSchema.user_name = params.Name,
-    userSchema.user_mail = params.Mail,
-    userSchema.user_password = sha1(params.Password),
-    userSchema.user_state = false,
-    userSchema.user_role = false
+    if(params.Role == "Cliente"){
+        userSchema.user_name = params.Name;
+        userSchema.user_lastName = params.LastName;
+        userSchema.user_age = params.Age;
+        userSchema.user_gender = params.Gender;
+        userSchema.user_phone = params.Phone;
+        }else{
+            userSchema.user_state = true;
+        }
 
-    userSchema.save((error, user) => {
-    if(error){
+    userSchema.save((err, user) => {
+    if(err){
             res.status(500).send({
             message :"server err....\n "+ " --> "+error
             })
