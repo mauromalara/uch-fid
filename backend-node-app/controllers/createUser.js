@@ -24,22 +24,15 @@ function createUser (req, res){
 
     userSchema.save((err, user) => {
     if(err){
-            res.status(500).send({
-            message :"server err....\n "+ " --> "+error
-            })
+            res.status(500).send({  message :"SERVER ERR --> "+err })
         }
         else
         {
         if(user){
-            res.send({
-            message: " SAVE: -->  " + userSchema})
-            //res.redirect(""); //SEND TO THE INDEX PAGE...
-            }
+            res.status(200).send({  message: " SAVE: -->  " + userSchema})  }
             else
             {
-            res.status(200).send({
-                message: "NOT SAVED..."
-                })
+            res.status(404).send({  message: "NOT SAVED..." })
             }
         }
     })

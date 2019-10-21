@@ -14,20 +14,16 @@ function readUser(req , res){
                                 let userId = userMail[0]._id;
                                 User.findOneAndUpdate({_id : userId},{user_state : true}, function(err, updateUser){
                                         if(err){
-                                            res.status(500).send({
-                                                message: "Server ERR... "+err
-                                            })
+                                            res.status(500).send({  message: "Server ERR... "+err   })
                                         }
                                         else
                                         {
                                         if(updateUser){
-                                            res.status(200).send({ message : "UPDATED..."});
+                                            res.status(200).send({ message : "UPDATED STATE --> "+updateUser})
                                             }
                                             else
                                             {
-                                            res.status(404).send({
-                                                message: "The person not exist..."
-                                                })
+                                            res.status(404).send({  message: "The person not exist..."  })
                                             }
                                         }
                                     })

@@ -19,7 +19,7 @@ function readUser(req , res){
             "Date" : user[0].user_date_register
             }
 
-        res.send({        message: JSON.stringify(userJSON)    })
+        res.status(200).send({  message: JSON.stringify(userJSON)   })
         }
     });
 }
