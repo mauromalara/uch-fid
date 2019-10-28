@@ -34,14 +34,6 @@ const routes = [
     meta: {
       authentificated: true
     }
-  },
-  {
-    path: '/catalog/:id',
-    name: 'articleDetail',
-    component: () => import(/* webpackChunkName: "articleDetail" */ '../views/ArticleDetail.vue'),
-    meta: {
-      authentificated: true
-    }
   }
 ]
 

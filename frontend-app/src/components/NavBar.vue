@@ -25,7 +25,7 @@ export default {
       let menuItems = [
         {
           title: "Registro",
-          link: "/registro"
+          link: "/register"
         },
         {
           title: "Login",

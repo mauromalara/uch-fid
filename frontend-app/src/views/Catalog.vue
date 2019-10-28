@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import Article from "@/components/Article.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
