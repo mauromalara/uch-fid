@@ -31,9 +31,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  components: {
-    Article
-  },
   computed: {
     ...mapState(["articles"]),
     ...mapActions(["getArticles"])
