@@ -8,7 +8,7 @@
 
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav v-for="item of items" :key="item.title">
-              <b-nav-item v-if="username" :to="item.link" exact>{{ item.title }}</b-nav-item>
+              <b-nav-item :to="item.link" exact>{{ item.title }}</b-nav-item>
             </b-navbar-nav>
           </b-collapse>
         </b-container>
