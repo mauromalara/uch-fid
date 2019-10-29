@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/components/Login'
-import firebase from 'firebase'
+import Login from '@/views/Login'
+import Register from '@/views/Register'
+import Catalog from '@/views/Catalog'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -11,29 +13,22 @@ const routes = [
     redirect: '/login'
   },
   {
-    path: '/',
-    redirect: '/login'
-  },
-  {
     path: '/login',
     name: 'login',
     component: Login
   },
   {
-    path: '/home',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    path: '/catalog',
+    name: 'catalog',
+    component: Catalog,
     meta: {
-      authentificated: true
+      requiresAuth: true
     }
   },
   {
-    path: '/catalog',
-    name: 'catalog',
-    component: () => import(/* webpackChunkName: "catalog" */ '../views/Catalog.vue'),
-    meta: {
-      authentificated: true
-    }
+    path: '/register',
+    name: 'register',
+    component: Register
   }
 ]
 
@@ -44,15 +39,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let username = firebase.auth().currentUser;
-  let authorization = to.matched.some(record => record.meta.authentificated);
-  console.log(username)
-  if(authorization && !username){
-    next('login');
-  }else if (!authorization && username){
-    next('home');
-  }else{
-    next();
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/login') 
+  } else {
+    next() 
   }
 })
 

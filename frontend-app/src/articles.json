@@ -1,9 +1,0 @@
-[
-    {
-        id: 1,
-        code: 'A5784F',
-        name: 'Mouse',
-        stock: 24,
-        unit_price: 1200.58
-    }
-]
