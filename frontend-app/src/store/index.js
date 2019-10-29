@@ -13,7 +13,7 @@ export default new Vuex.Store({
   },
   mutations: {
     fillUpArticles(state, dataArticles) {
-      state.articles = dataArticles
+      state.articles = dataArticles;
     },
     auth_request(state){
       state.status = 'loading'
@@ -33,12 +33,11 @@ export default new Vuex.Store({
   },
   actions: {
     getArticles: async function ({commit}) {
-      const data = await fetch('./articles.json');
-      const articles = await data.json();
-      commit('fillUpArticles', articles);
+      const data = await fetch('http://localhost:8080/test');
+      const dataArticles = await data.json();
+      commit('fillUpArticles', dataArticles);
     },
     login({ commit }, user) {
-      console.log(user)
       return new Promise((resolve, reject) => {
         commit('auth_request')
         axios({
