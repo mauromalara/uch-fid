@@ -3,19 +3,27 @@ package dal;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.sql.Connection;
 
 public class MySQLAccess {
 	
+	private final String url = "jdbc:mysql://b0a9853bb934be:b5cc646e@us-cdbr-iron-east-05.cleardb.net/heroku_3f26ca8502dfdfc?reconnect=true";
+    private final String user = "b0a9853bb934be";
+  	private final String password = "b5cc646e";
+  	
 	private Connection cnn = null;
 	   public Connection getConnection(){
 	      if (cnn == null) {
 	    	  try{
-		            cnn = DriverManager.getConnection("mysql://b0a9853bb934be:b5cc646e@us-cdbr-iron-east-05.cleardb.net/heroku_3f26ca8502dfdfc?reconnect=true", "b0a9853bb934be", "b5cc646e");
+		            cnn = DriverManager.getConnection(url,user,password);
 		            System.out.println("Connected...");
-		            createTable();
-	            }catch (SQLException ex) {
+	    		
+		            
+		            //createTable();
+	            }catch (SQLException ex ) {
 	        	 System.out.print("ERROR ENCONTRADO: "+ex);
+	   
 	        	 }
 	      }
 	      return cnn;
