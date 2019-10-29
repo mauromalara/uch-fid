@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class OrderRepository {
 	private final String table = "orders";
 /*We pull all the table order*/ 
-	   public ArrayList<Order> getOrder(Connection cnx) throws SQLException {
+	   public ArrayList<Order> getOrders(Connection cnx) throws SQLException {
 	      ArrayList<Order> ordersList = new ArrayList<Order>();
 	      try{
 	         PreparedStatement query = cnx.prepareStatement("SELECT * FROM " + this.table);

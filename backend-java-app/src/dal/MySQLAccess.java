@@ -18,9 +18,7 @@ public class MySQLAccess {
 	    	  try{
 		            cnn = DriverManager.getConnection(url,user,password);
 		            System.out.println("Connected...");
-	    		
-		            
-		            //createTable();
+		            createTable();
 	            }catch (SQLException ex ) {
 	        	 System.out.print("ERROR ENCONTRADO: "+ex);
 	   

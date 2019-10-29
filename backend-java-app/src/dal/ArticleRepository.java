@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ArticleRepository {
 	private final String table = "articles";
 
-	   public ArrayList<Article> getArticle(Connection cnx) throws SQLException {
+	   public ArrayList<Article> getArticles(Connection cnx) throws SQLException {
 	      ArrayList<Article> articlesList = new ArrayList<Article>();
 	      try{
 	         PreparedStatement query = cnx.prepareStatement("SELECT * FROM " + this.table);
@@ -27,9 +27,6 @@ public class ArticleRepository {
 	            articlesList.add(a); //Add the object 
 	            System.out.println("SELECT Realizado - Objeto producto realizado de forma exitosa.");
 	         }
-	         /*resultado.close();
-	         consulta.close();
-	         conexion.close();*/
 	      }catch(SQLException ex){
 	         throw new SQLException(ex);
 	      }
