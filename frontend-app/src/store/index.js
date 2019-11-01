@@ -26,6 +26,9 @@ export default new Vuex.Store({
     auth_error(state){
       state.status = 'error'
     },
+    register_success(state){
+      console.log('Registro OK');
+    },
     logout(state){
       state.status = ''
       state.token = ''
@@ -51,6 +54,29 @@ export default new Vuex.Store({
             localStorage.setItem('token', token)
             axios.defaults.headers.common['authorization'] = token
             commit('auth_success', token, user)
+            resolve(resp)
+          })
+          .catch(err => {
+            commit('auth_error')
+            localStorage.removeItem('token')
+            reject(err)
+          })
+      })
+    },
+    register({commit}, user){
+      return new Promise((resolve, reject) => {
+        commit('auth_request')
+        axios({
+            url: ' http://localhost:3800/apiBack-End/createUser',
+            data: user,
+            method: 'POST'
+          })
+          .then(resp => {
+            const token = null
+            const user = resp.data.user
+            localStorage.setItem('token', token)
+            axios.defaults.headers.common['authorization'] = token
+            commit('auth_success')
             resolve(resp)
           })
           .catch(err => {
