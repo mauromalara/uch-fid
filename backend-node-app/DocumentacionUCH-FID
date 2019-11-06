@@ -1,0 +1,35 @@
+Install
+    --> sudo pacman -S node
+    --> sudo pacman -S npm
+    --> sudo pacman -S git
+    //snapd intall archlinux
+    --> git clone https://aur.archlinux.org/snapd.git
+    --> cd snapd
+    --> sudo chmod 777 <carpeta>
+    --> makepkg -si
+    --> sudo systemctl enable --now snapd.socket
+    --> sudo ln -s /var/lib/snapd/snap /snap
+    
+    --> sudo snap install heroku --classic
+    --> sudo pacman -S 	intellij-idea-ultimate-edition
+    --> snap install postman
+    
+Config GIT
+    --> git config --global user.email "you@example.com"
+    --> git config --global user.name "Tu Nombre"
+
+    --> git push
+    --> git checkout -b devBastar2
+    --> git add .
+    --> git commit -m 'First Commit'
+    --> git pull
+    --> git status (" VERIFICAMOS ESTADO ")
+    
+Config NPM Proyect
+    --> cd /run/media/bastar2/Bastar2 Linux/Documentos/proyects/uch-fid/backend-node-app/
+    --> npm init
+    --> npm install express --calssic
+    --> npm install body-parser --save
+    --> npm install mongoose
+    --> npm install bcrypt
+    --> npm install jsonwebtoken
