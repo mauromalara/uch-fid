@@ -1,0 +1,20 @@
+[
+    {
+        "name":"Art1",
+        "code": "A75",
+        "stock": 15,
+        "unit_price": 200
+    },
+    {
+        "name":"Art2",
+        "code": "A75",
+        "stock": 18,
+        "unit_price": 200
+    },    
+    {
+        "name":"Art3",
+        "code": "A75",
+        "stock": 23,
+        "unit_price": 200
+    }
+]
